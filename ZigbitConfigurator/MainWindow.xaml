@@ -1,0 +1,81 @@
+﻿<Window x:Class="ZigbitConfigurator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SerialNet Configurator by Hydr0 Source LLC" Height="350" Width="619">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Read device" Height="23" Name="btn_readCOnfig" Width="75" Click="btn_readCOnfig_Click" />
+                <Button Content="Write settings" Height="23" Margin="0,0,0,0" Name="button1" Width="75" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" >
+                <Label FontWeight="Bold" Background="Coral">Status</Label>
+            <Label>Please connect device</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                
+                <StackPanel Orientation="Vertical">
+                    <ListBox Height="251" HorizontalAlignment="Left" Name="listBox1" VerticalAlignment="Top" Width="298">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Device mode</TextBlock>
+                            <Separator></Separator>
+                            <ComboBox Width="100" Margin="100,0,0,0" SelectedIndex="0" >
+                                <ComboBoxItem>Unknown</ComboBoxItem>
+                                <ComboBoxItem>Coordinator</ComboBoxItem>
+                                <ComboBoxItem>Router</ComboBoxItem>
+                                <ComboBoxItem>EndDevice</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Automatic Networking</TextBlock>
+                            <Separator></Separator>
+                            <ComboBox Width="100" Margin="50,0,0,0" SelectedIndex="0" >
+                                <ComboBoxItem>Enabled</ComboBoxItem>
+                                <ComboBoxItem>Disabled</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Personal Area Network ID</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="32,0,0,0" Background="LightGray" Width="100">000000000000</TextBox>
+                        </StackPanel>
+
+
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                        <TextBlock>test</TextBlock>
+                    </ListBox>
+                </StackPanel>
+                <ListView Height="281" Name="listView1" Width="297" SelectionMode="Single">
+                    <ListViewItem>test</ListViewItem>
+                    <ListViewItem>test</ListViewItem>
+                    <ListViewItem>test</ListViewItem>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
