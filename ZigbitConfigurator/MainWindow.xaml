@@ -20,18 +20,18 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock >Device mode</TextBlock>
                             <Separator></Separator>
-                            <ComboBox Width="100" Margin="100,0,0,0" SelectedIndex="0" >
-                                <ComboBoxItem>Unknown</ComboBoxItem>
+                            <ComboBox Width="100" Margin="100,0,0,0" SelectedIndex="0" Name="RoleComboBox">                                
                                 <ComboBoxItem>Coordinator</ComboBoxItem>
                                 <ComboBoxItem>Router</ComboBoxItem>
                                 <ComboBoxItem>EndDevice</ComboBoxItem>
+                                <ComboBoxItem>Unknown</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock >Automatic Networking</TextBlock>
                             <Separator></Separator>
-                            <ComboBox Width="100" Margin="50,0,0,0" SelectedIndex="0" >
+                            <ComboBox Width="100" Margin="50,0,0,0" SelectedIndex="0" Name="AutoNetworkComboBox" >
                                 <ComboBoxItem>Enabled</ComboBoxItem>
                                 <ComboBoxItem>Disabled</ComboBoxItem>
                             </ComboBox>
@@ -40,7 +40,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock >Personal Area Network ID</TextBlock>
                             <Separator></Separator>
-                            <TextBox Margin="32,0,0,0" Background="LightGray" Width="100">000000000000</TextBox>
+                            <TextBox Margin="32,0,0,0" Background="LightGray" Width="100" Name="PANIDTextBox">000000000000</TextBox>
                         </StackPanel>
 
 

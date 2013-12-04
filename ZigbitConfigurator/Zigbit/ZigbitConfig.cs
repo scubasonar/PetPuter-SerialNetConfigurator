@@ -17,7 +17,7 @@ namespace ZigbitConfigurator.Zigbit
 
     public class ZigbitConfig
     {
-        enum RADIO_ROLE { COORDINATOR = 0, ROUTER = 1, ENDDEVICE = 2, UNKNOWN = 3 };
+        public enum RADIO_ROLE { COORDINATOR = 0, ROUTER = 1, ENDDEVICE = 2, UNKNOWN = 3 };
 
         public string port = "COM4";
         public int baud = 38400;
@@ -28,7 +28,7 @@ namespace ZigbitConfigurator.Zigbit
         public int channel = 0; //!< current radio channel
         public long chMask = 0; //!< channel mask (should really be a bit string??)        
         public Boolean autonet = false; //!< automatic networking mode enabled        
-        RADIO_ROLE role = RADIO_ROLE.UNKNOWN; //!< role of this device in the network
+        public RADIO_ROLE role = RADIO_ROLE.UNKNOWN; //!< role of this device in the network
 
         public int src = 0; //!< this devices short network address
         public int sn = 0; //!< this devices long network address
