@@ -5,6 +5,16 @@ using System.Text;
 
 namespace ZigbitConfigurator.Zigbit
 {
+    public class ZigbitConfigEventArgs : EventArgs
+    {
+        public ZigbitConfigEventArgs(ZigbitConfig config)
+        {
+            ZigbitConfig = config;
+        }
+
+        public ZigbitConfig ZigbitConfig { get; private set; }
+    }
+
     public class ZigbitConfig
     {
         enum RADIO_ROLE { COORDINATOR = 0, ROUTER = 1, ENDDEVICE = 2, UNKNOWN = 3 };

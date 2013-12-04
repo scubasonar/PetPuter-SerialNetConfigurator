@@ -28,11 +28,20 @@ namespace ZigbitConfigurator
             try
             {
                 radio = new ZigbitDevice();
+                radio.ConfigChanged += new EventHandler<ZigbitConfigEventArgs>(radio_ConfigChanged);
             }
             catch (Exception ex)
             {
                 radio = null;
             }
+        }
+
+        //! Parser bubbles up to Zigbit device that bubbles up to here with a nice config
+        void radio_ConfigChanged(object sender, ZigbitConfigEventArgs e)
+        {
+            ZigbitConfig config = e.ZigbitConfig;
+            //! update the UI now that we have a nice config!
+
         }
 
         private void btn_readCOnfig_Click(object sender, RoutedEventArgs e)

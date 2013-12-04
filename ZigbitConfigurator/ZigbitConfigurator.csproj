@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Zigbit\SerialNet.cs" />
     <Compile Include="Zigbit\ZigbitConfig.cs" />
     <Compile Include="Zigbit\ZigbitDevice.cs" />
     <Compile Include="Zigbit\ZigbitParser.cs" />

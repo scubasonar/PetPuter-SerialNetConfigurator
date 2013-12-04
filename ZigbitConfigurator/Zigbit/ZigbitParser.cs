@@ -8,6 +8,11 @@ namespace ZigbitConfigurator.Zigbit
 {
     class ZigbitParser
     {
+        //public event EventHandler<String> DataReceived; //!< event wraps around the zigbit data transfer functions ATDU ATDx etc to treat the zigbit like a normal serialport
+        //public event EventHandler<String> ChildJoined;
+        //public event EventHandler<String> ChildLost;
+        public event EventHandler<ZigbitConfigEventArgs> ConfigReceived;
+
         public const int BUFFER_SIZE = 3000; //!< size of our receive buffer, at%H gives back a lot of data.
         public DateTime lastRX; //!< time for the last data we received for timeouts etc
 
@@ -68,9 +73,19 @@ namespace ZigbitConfigurator.Zigbit
             {
                 case "AT%H":
                     ZigbitConfig config = new ZigbitConfig(values);
+                    if (config != null)
+                        OnConfigReceived(config);
                     break;
             }
 
+        }
+
+        public virtual void OnConfigReceived(ZigbitConfig config)
+        {
+            if(ConfigReceived != null)
+            {
+                ConfigReceived(this, new ZigbitConfigEventArgs(config));
+            }
         }
     }
 }
