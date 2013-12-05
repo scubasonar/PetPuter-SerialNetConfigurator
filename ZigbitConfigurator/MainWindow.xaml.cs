@@ -23,7 +23,6 @@ namespace ZigbitConfigurator
     public partial class MainWindow : Window
     {
         delegate void UpdateRadioConfig(object sender, ZigbitConfigEventArgs e);
-
         UpdateRadioConfig UpdateRadioConfigHandler;
 
         ZigbitDevice radio;
@@ -50,7 +49,7 @@ namespace ZigbitConfigurator
             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, UpdateRadioConfigHandler, this, e);
         }
 
-        //! Parser bubbles up to Zigbit device that bubbles up to here with a nice config
+        //! We update the UI here to reflect the device configuration. 
         void radio_ConfigChanged(object sender, ZigbitConfigEventArgs e)
         {
             ZigbitConfig config = e.ZigbitConfig;
@@ -65,14 +64,27 @@ namespace ZigbitConfigurator
             else
                 AutoNetworkComboBox.SelectedIndex = 1;
 
-            PANIDTextBox.Text = config.panID.ToString();
-
-            //! Update the UI to match the config
-            
-
+            PANIDTextBox.Text = config.panID.ToString(); 
+            SPANIDTextBox.Text = config.sPanID.ToString();
+            ChannelMaskTextBox.Text = config.chMask.ToString();
+            ChannelTextBox.Text = config.channel.ToString();
+            ShortAddressTextBox.Text = config.src.ToString();
+            SNTextBox.Text = config.sn.ToString();
+            TXPowerTextBox.Text = config.sn.ToString();
+            //! Update the UI to match the config            
         }
-        
 
+        //! Generate a ZigbitConfig object based on the current UI fields 
+        //! Used before write config to collect user entries
+        ZigbitConfig UItoConfig()
+        {
+            ZigbitConfig finalConfig = new ZigbitConfig();
+            long.TryParse(PANIDTextBox.Text,       out finalConfig.panID);
+            int.TryParse(SPANIDTextBox.Text,       out finalConfig.sPanID);
+            long.TryParse(ChannelMaskTextBox.Text, out finalConfig.chMask);
+
+            return finalConfig;
+        }
 
         private void btn_readCOnfig_Click(object sender, RoutedEventArgs e)
         {

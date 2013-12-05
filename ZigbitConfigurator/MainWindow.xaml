@@ -43,31 +43,42 @@
                             <TextBox Margin="32,0,0,0" Background="LightGray" Width="100" Name="PANIDTextBox">000000000000</TextBox>
                         </StackPanel>
 
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Short PAN ID</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="98,0,0,0" Background="LightGray" Width="100" Name="SPANIDTextBox">000000000000</TextBox>
+                        </StackPanel>
 
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Channel Mask</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="95,0,0,0" Background="LightGray" Width="100" Name="ChannelMaskTextBox">000000000000</TextBox>
+                        </StackPanel>
 
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
-                        <TextBlock>test</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Channel</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="125,0,0,0" Background="LightGray" Width="100" Name="ChannelTextBox">000000000000</TextBox>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Short Address</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="95,0,0,0" Background="LightGray" Width="100" Name="ShortAddressTextBox">000000000000</TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Long Address</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="97,0,0,0" Background="LightGray" Width="100" Name="SNTextBox">000000000000</TextBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock >Transmit Power</TextBlock>
+                            <Separator></Separator>
+                            <TextBox Margin="90,0,0,0" Background="LightGray" Width="100" Name="TXPowerTextBox">000000000000</TextBox>
+                        </StackPanel>
+                       
+                       
                     </ListBox>
                 </StackPanel>
                 <ListView Height="281" Name="listView1" Width="297" SelectionMode="Single">

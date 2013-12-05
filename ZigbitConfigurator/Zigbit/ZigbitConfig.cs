@@ -85,8 +85,7 @@ namespace ZigbitConfigurator.Zigbit
             syncPeriod = int.Parse(values[11].Split(new char[] { ':' })[1]);
             txPWR = int.Parse(values[12].Split(new char[] { ':' })[1]);
 
-            sn = int.Parse(values[25].Split(new char[] { ':' })[1]);
-            string test = "hello";
+            sn = int.Parse(values[25].Split(new char[] { ':' })[1]);            
         }
     }
 }
