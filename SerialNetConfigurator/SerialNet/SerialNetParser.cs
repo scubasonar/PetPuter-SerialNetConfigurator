@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 
-namespace ZigbitConfigurator.Zigbit
+namespace Hydr0Source.PetPuter.SerialNet
 {
-    class ZigbitParser
+    class SerialNetParser
     {
-        //public event EventHandler<String> DataReceived; //!< event wraps around the zigbit data transfer functions ATDU ATDx etc to treat the zigbit like a normal serialport
+        //public event EventHandler<String> DataReceived; //!< event wraps around the SerialNet data transfer functions ATDU ATDx etc to treat the SerialNet like a normal serialport
         //public event EventHandler<String> ChildJoined;
         //public event EventHandler<String> ChildLost;
-        public event EventHandler<ZigbitConfigEventArgs> ConfigReceived;
+        public event EventHandler<SerialNetConfigEventArgs> ConfigReceived;
 
         public const int BUFFER_SIZE = 3000; //!< size of our receive buffer, at%H gives back a lot of data.
         public DateTime lastRX; //!< time for the last data we received for timeouts etc
@@ -19,8 +19,8 @@ namespace ZigbitConfigurator.Zigbit
         byte[] buf = new byte[BUFFER_SIZE]; // !< our buffer for incoming data to be parsed
         int index = 0; //!< where we are as far as filling the buffer goes
 
-        //!< zigbit parser needs a serialport to attach to
-        public ZigbitParser(SerialPort port)
+        //!< SerialNet parser needs a serialport to attach to
+        public SerialNetParser(SerialPort port)
         {           
             port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
         }
@@ -72,7 +72,7 @@ namespace ZigbitConfigurator.Zigbit
             switch (values[0].TrimEnd(new char[]{' '}))
             {
                 case "AT%H":
-                    ZigbitConfig config = new ZigbitConfig(values);
+                    SerialNetConfig config = new SerialNetConfig(values);
                     if (config != null)
                         OnConfigReceived(config);
                     break;
@@ -80,11 +80,11 @@ namespace ZigbitConfigurator.Zigbit
 
         }
 
-        public virtual void OnConfigReceived(ZigbitConfig config)
+        public virtual void OnConfigReceived(SerialNetConfig config)
         {
             if(ConfigReceived != null)
             {
-                ConfigReceived(this, new ZigbitConfigEventArgs(config));
+                ConfigReceived(this, new SerialNetConfigEventArgs(config));
             }
         }
     }

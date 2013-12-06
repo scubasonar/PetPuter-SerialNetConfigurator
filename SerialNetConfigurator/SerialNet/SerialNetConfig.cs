@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZigbitConfigurator.Zigbit
+namespace Hydr0Source.PetPuter.SerialNet
 {
-    public class ZigbitConfigEventArgs : EventArgs
+    public class SerialNetConfigEventArgs : EventArgs
     {
-        public ZigbitConfigEventArgs(ZigbitConfig config)
+        public SerialNetConfigEventArgs(SerialNetConfig config)
         {
-            ZigbitConfig = config;
+            SerialNetConfig = config;
         }
 
-        public ZigbitConfig ZigbitConfig { get; private set; }
+        public SerialNetConfig SerialNetConfig { get; private set; }
     }
 
-    public class ZigbitConfig
+    public class SerialNetConfig
     {
-        public enum RADIO_ROLE { COORDINATOR = 0, ROUTER = 1, ENDDEVICE = 2, UNKNOWN = 3 };
+        public enum NODE_ROLE { COORDINATOR = 0, ROUTER = 1, ENDDEVICE = 2, UNKNOWN = 3 };
 
         public string port = "COM4";
         public int baud = 38400;
@@ -28,7 +28,7 @@ namespace ZigbitConfigurator.Zigbit
         public int channel = 0; //!< current radio channel
         public long chMask = 0; //!< channel mask (should really be a bit string??)        
         public Boolean autonet = false; //!< automatic networking mode enabled        
-        public RADIO_ROLE role = RADIO_ROLE.UNKNOWN; //!< role of this device in the network
+        public NODE_ROLE role = NODE_ROLE.UNKNOWN; //!< role of this device in the network
 
         public int src = 0; //!< this devices short network address
         public int sn = 0; //!< this devices long network address
@@ -36,19 +36,19 @@ namespace ZigbitConfigurator.Zigbit
         public int txPWR = 0; //!< transmit power (
 
 
-        public ZigbitConfig()
+        public SerialNetConfig()
         {
         }
 
-        public ZigbitConfig(string[] values)
+        public SerialNetConfig(string[] values)
         {
             if (values[0].Contains("AT%H"))
             {
-                readFullConfig(values);
+                ReadFullConfig(values);
             }
         }
 
-        void readFullConfig(string[] values)
+        void ReadFullConfig(string[] values)
         {
             int _role;
 
@@ -68,16 +68,16 @@ namespace ZigbitConfigurator.Zigbit
             switch(_role)
             {
                 case 0:
-                    role = RADIO_ROLE.COORDINATOR;
+                    role = NODE_ROLE.COORDINATOR;
                     break;
                 case 1:
-                    role = RADIO_ROLE.ROUTER;
+                    role = NODE_ROLE.ROUTER;
                     break;
                 case 2:
-                    role = RADIO_ROLE.ENDDEVICE;
+                    role = NODE_ROLE.ENDDEVICE;
                     break;
                 default:
-                    role = RADIO_ROLE.UNKNOWN;
+                    role = NODE_ROLE.UNKNOWN;
                     break;
             }
 

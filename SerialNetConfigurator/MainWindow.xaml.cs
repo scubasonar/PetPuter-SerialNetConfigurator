@@ -13,30 +13,30 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-using ZigbitConfigurator.Zigbit;
+using Hydr0Source.PetPuter.SerialNet;
 
-namespace ZigbitConfigurator
+namespace Hydr0Source.PetPuter.SerialNetConfigurator
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        delegate void UpdateRadioConfig(object sender, ZigbitConfigEventArgs e);
+        delegate void UpdateRadioConfig(object sender, SerialNetConfigEventArgs e);
         UpdateRadioConfig UpdateRadioConfigHandler;
 
-        ZigbitDevice radio;
+        SerialNetDevice radio;
 
         public MainWindow()
         {
             InitializeComponent();
-            RoleComboBox.SelectedIndex = (int)ZigbitConfig.RADIO_ROLE.UNKNOWN;
+            RoleComboBox.SelectedIndex = (int)SerialNetConfig.NODE_ROLE.UNKNOWN;
             UpdateRadioConfigHandler = radio_ConfigChanged;
 
             try
             {
-                radio = new ZigbitDevice();
-                radio.ConfigChanged += new EventHandler<ZigbitConfigEventArgs>(radio_ConfigChangedSafe);
+                radio = new SerialNetDevice();
+                radio.ConfigChanged += new EventHandler<SerialNetConfigEventArgs>(radio_ConfigChangedSafe);
             }
             catch (Exception ex)
             {
@@ -44,15 +44,15 @@ namespace ZigbitConfigurator
             }
         }
 
-        void radio_ConfigChangedSafe(object sender, ZigbitConfigEventArgs e)
+        void radio_ConfigChangedSafe(object sender, SerialNetConfigEventArgs e)
         {
             this.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, UpdateRadioConfigHandler, this, e);
         }
 
         //! We update the UI here to reflect the device configuration. 
-        void radio_ConfigChanged(object sender, ZigbitConfigEventArgs e)
+        void radio_ConfigChanged(object sender, SerialNetConfigEventArgs e)
         {
-            ZigbitConfig config = e.ZigbitConfig;
+            SerialNetConfig config = e.SerialNetConfig;
             //! update the UI now that we have a nice config!
             String hello = "";
 
@@ -74,11 +74,11 @@ namespace ZigbitConfigurator
             //! Update the UI to match the config            
         }
 
-        //! Generate a ZigbitConfig object based on the current UI fields 
+        //! Generate a SerialNetConfig object based on the current UI fields 
         //! Used before write config to collect user entries
-        ZigbitConfig UItoConfig()
+        SerialNetConfig UItoConfig()
         {
-            ZigbitConfig finalConfig = new ZigbitConfig();
+            SerialNetConfig finalConfig = new SerialNetConfig();
             long.TryParse(PANIDTextBox.Text,       out finalConfig.panID);
             int.TryParse(SPANIDTextBox.Text,       out finalConfig.sPanID);
             long.TryParse(ChannelMaskTextBox.Text, out finalConfig.chMask);

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace ZigbitConfigurator
+namespace Hydr0Source.PetPuter.ZigbitConfigurator
 {
     /// <summary>
     /// Interaction logic for App.xaml
