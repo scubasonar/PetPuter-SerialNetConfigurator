@@ -64,8 +64,8 @@ namespace Hydr0Source.PetPuter.SerialNetConfigurator
             else
                 AutoNetworkComboBox.SelectedIndex = 1;
 
-            PANIDTextBox.Text = config.panID.ToString(); 
-            SPANIDTextBox.Text = config.sPanID.ToString();
+            PANIDTextBox.Text = config.panIDLong.ToString(); 
+            SPANIDTextBox.Text = config.panID.ToString();
             ChannelMaskTextBox.Text = config.chMask.ToString();
             ChannelTextBox.Text = config.channel.ToString();
             ShortAddressTextBox.Text = config.src.ToString();
@@ -79,8 +79,8 @@ namespace Hydr0Source.PetPuter.SerialNetConfigurator
         SerialNetConfig UItoConfig()
         {
             SerialNetConfig finalConfig = new SerialNetConfig();
-            long.TryParse(PANIDTextBox.Text,       out finalConfig.panID);
-            int.TryParse(SPANIDTextBox.Text,       out finalConfig.sPanID);
+            long.TryParse(PANIDTextBox.Text,       out finalConfig.panIDLong);
+            int.TryParse(SPANIDTextBox.Text,       out finalConfig.panID);
             long.TryParse(ChannelMaskTextBox.Text, out finalConfig.chMask);
 
             return finalConfig;
@@ -88,7 +88,10 @@ namespace Hydr0Source.PetPuter.SerialNetConfigurator
 
         private void btn_readCOnfig_Click(object sender, RoutedEventArgs e)
         {
-            radio.readConfig();
+            if (radio == null)
+                MessageBox.Show("Please connect a device first");
+            else
+                radio.readConfig();
         }
        
     }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZigbitConfigurator", "ZigbitConfigurator\ZigbitConfigurator.csproj", "{211C1BDD-3338-4E62-8464-CD0BB74B9F32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialNetConfigurator", "SerialNetConfigurator\SerialNetConfigurator.csproj", "{211C1BDD-3338-4E62-8464-CD0BB74B9F32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

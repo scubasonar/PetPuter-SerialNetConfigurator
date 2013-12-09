@@ -22,7 +22,7 @@ namespace Hydr0Source.PetPuter.SerialNet
         SerialPort sPort; //!< raw serial port we talk to SerialNet device through
         SerialNetConfig config; //!< config for the device with network settings etc
         SerialNetParser parser; //!< parser to handle incoming commands
-
+        SerialNetProtocol protocol; //!< Protocol with commands etc
         
         SerialNetDeviceStatus _DeviceStatus = SerialNetDeviceStatus.NO_USB;
 
@@ -31,13 +31,16 @@ namespace Hydr0Source.PetPuter.SerialNet
 
         public SerialNetDevice()
         {
-            config = new SerialNetConfig();           
+            protocol = new SerialNetProtocol();
+            config = new SerialNetConfig(protocol);           
             sPort = new SerialPort(config.port, config.baud);
-
+            
             sPort.Open();
 
-            parser = new SerialNetParser(sPort);
-            parser.ConfigReceived += new EventHandler<SerialNetConfigEventArgs>(parser_ConfigReceived); //!< parser will bubble up a config if it gets a full one from AT%H command                          
+            parser = new SerialNetParser(protocol, sPort);
+            parser.ConfigReceived += new EventHandler<SerialNetConfigEventArgs>(parser_ConfigReceived); //!< parser will bubble up a config if it gets a full one from AT%H command       
+
+            
         }
 
         void parser_ConfigReceived(object sender, SerialNetConfigEventArgs e)

@@ -13,6 +13,8 @@ namespace Hydr0Source.PetPuter.SerialNet
         //public event EventHandler<String> ChildLost;
         public event EventHandler<SerialNetConfigEventArgs> ConfigReceived;
 
+        public SerialNetProtocol protocol;
+
         public const int BUFFER_SIZE = 3000; //!< size of our receive buffer, at%H gives back a lot of data.
         public DateTime lastRX; //!< time for the last data we received for timeouts etc
 
@@ -20,8 +22,9 @@ namespace Hydr0Source.PetPuter.SerialNet
         int index = 0; //!< where we are as far as filling the buffer goes
 
         //!< SerialNet parser needs a serialport to attach to
-        public SerialNetParser(SerialPort port)
-        {           
+        public SerialNetParser(SerialNetProtocol _protocol, SerialPort port)
+        {
+            protocol = _protocol;
             port.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
         }
 
@@ -72,7 +75,7 @@ namespace Hydr0Source.PetPuter.SerialNet
             switch (values[0].TrimEnd(new char[]{' '}))
             {
                 case "AT%H":
-                    SerialNetConfig config = new SerialNetConfig(values);
+                    SerialNetConfig config = new SerialNetConfig(protocol, values);
                     if (config != null)
                         OnConfigReceived(config);
                     break;
