@@ -30,6 +30,7 @@ namespace Hydr0Source.PetPuter.SerialNet
         public int panID = 0; //!< short PAN ID       
         public int channel = 0; //!< current radio channel
         public long chMask = 0; //!< channel mask (should really be a bit string??)        
+        public int chPage = 0;
         public Boolean autonet = false; //!< automatic networking mode enabled        
         public NODE_ROLE role = NODE_ROLE.UNKNOWN; //!< role of this device in the network
 
@@ -56,11 +57,11 @@ namespace Hydr0Source.PetPuter.SerialNet
 
             if (values[0].Contains("AT%H"))
             {
-                ReadFullConfig(values);
+                ParseFullConfig(values);
             }
         }
 
-        void ReadFullConfig(string[] values)
+        void ParseFullConfig(string[] values)
         {
             int _role;
             string command = "", data = "";
@@ -91,10 +92,7 @@ namespace Hydr0Source.PetPuter.SerialNet
                             break;
                         case (int)SerialNetProtocol.CFG_COMMANDS.WCHMASK:
                             long.TryParse(fields[1], out chMask);                           
-                            break;
-                        case (int)SerialNetProtocol.CFG_COMMANDS.WCHPAGE:
-                            //!< not used yet D:
-                            break;
+                            break;                        
                         case (int)SerialNetProtocol.CFG_COMMANDS.WAUTONET:
                             int _autonet = 0;
                             int.TryParse(fields[1], out _autonet);                            
