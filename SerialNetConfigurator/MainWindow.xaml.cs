@@ -37,12 +37,43 @@ namespace Hydr0Source.PetPuter.SerialNetConfigurator
             {
                 radio = new SerialNetDevice();
                 radio.ConfigChanged += new EventHandler<SerialNetConfigEventArgs>(radio_ConfigChangedSafe);
+                radio.StatusChanged += new EventHandler<SerialNetDevice.DeviceStatusChangedEventArgs>(radio_StatusChanged);
+                
             }
             catch (Exception ex)
             {
                 radio = null;
             }
         }
+
+        void radio_StatusChanged(object sender, SerialNetDevice.DeviceStatusChangedEventArgs e)
+        {
+            switch (e.DeviceStatus)
+            {
+                case SerialNetDevice.SerialNetDeviceStatus.UNKNOWN:
+                    StatusLabel.Content = "Unknown status";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.NO_USB:
+                    StatusLabel.Content = "Please plug device into PC and connect";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.NO_SerialNet:
+                    StatusLabel.Content = "USB port OK, no PetPuter detected";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.NO_NETWORK:
+                    StatusLabel.Content = "PetPuter OK, not connected to network";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.OK_NETWORK:
+                    StatusLabel.Content = "PetPuter online";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.READ_CONFIG:
+                    StatusLabel.Content = "Reading device config";
+                    break;
+                case SerialNetDevice.SerialNetDeviceStatus.WRITE_CONFIG:
+                    StatusLabel.Content = "Writing device config";
+                    break;
+            }
+        }
+        
 
         void radio_ConfigChangedSafe(object sender, SerialNetConfigEventArgs e)
         {
@@ -77,22 +108,44 @@ namespace Hydr0Source.PetPuter.SerialNetConfigurator
         //! Generate a SerialNetConfig object based on the current UI fields 
         //! Used before write config to collect user entries
         SerialNetConfig UItoConfig()
-        {
+        {            
+            List<TextBox> invalid = new List<TextBox>();
             SerialNetConfig finalConfig = new SerialNetConfig();
-            long.TryParse(PANIDTextBox.Text,       out finalConfig.panIDLong);
-            int.TryParse(SPANIDTextBox.Text,       out finalConfig.panID);
-            long.TryParse(ChannelMaskTextBox.Text, out finalConfig.chMask);
+
+            if(!long.TryParse(PANIDTextBox.Text,       out finalConfig.panIDLong))
+                invalid.Add(PANIDTextBox);
+            if(!int.TryParse(SPANIDTextBox.Text,       out finalConfig.panID))
+                invalid.Add(PANIDTextBox);
+            if(!long.TryParse(ChannelMaskTextBox.Text, out finalConfig.chMask))
+                invalid.Add(ChannelMaskTextBox);
+
+            finalConfig.role = (SerialNetConfig.NODE_ROLE)RoleComboBox.SelectedIndex;
+            
+            foreach(TextBox t in invalid)
+            {
+                t.Background = Brushes.Red;
+            }
 
             return finalConfig;
         }
 
-        private void btn_readCOnfig_Click(object sender, RoutedEventArgs e)
+        private void btn_readConfig_Click(object sender, RoutedEventArgs e)
         {
             if (radio == null)
                 MessageBox.Show("Please connect a device first");
             else
                 radio.readConfig();
         }
+
+        private void btn_writeConfig_Click(object sender, RoutedEventArgs e)
+        {
+            if (radio == null)
+                MessageBox.Show("Please connect a device first");
+            else
+                radio.writeConfig(UItoConfig());
+        }
+
+  
        
     }
 }

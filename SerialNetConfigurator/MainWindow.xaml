@@ -6,12 +6,12 @@
         <StackPanel Orientation="Vertical">
             
             <StackPanel Orientation="Horizontal">
-                <Button Content="Read device" Height="23" Name="btn_readCOnfig" Width="75" Click="btn_readCOnfig_Click" />
-                <Button Content="Write settings" Height="23" Margin="0,0,0,0" Name="button1" Width="75" />
+                <Button Name="btn_readConfig" Content="Read device" Height="23" Width="75" Click="btn_readConfig_Click" />
+                <Button Name="btn_writeConfig"  Content="Write settings" Height="23" Width="75" Click="btn_writeConfig_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" >
                 <Label FontWeight="Bold" Background="Coral">Status</Label>
-            <Label>Please connect device</Label>
+                <Label Name="StatusLabel">Please connect device</Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 
